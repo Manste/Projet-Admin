@@ -1,6 +1,6 @@
 # Projet-Admin
 
-![administration system](images/sysadmin.jpg)
+![administration system](images/IT-networking.jpg)
 
 Dans le cadre du cours d'administration sytème, le but de ce projet est de mettre en place une architecture de répondant aux besoins spécifiques d'une entreprise, WoodyToys, usine de fabrication de jouets. 
 
@@ -10,7 +10,7 @@ Notre groupe est constitué de :
 - **Darryl Bilongo** avec pour vps '''vps651907.ovh.net''' soit '''51.77.203.6''' (serveur mail)
 
 #Schema Physique
-![schema physique](images/schemaWootoys)
+![schema physique](images/schemaWootoys.png)
 
 #Schema Prototype
-![schema prototype](images/schemaPrototype)
+![schema prototype](images/schemaPrototype.png)
