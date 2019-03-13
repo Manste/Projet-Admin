@@ -1,0 +1,20 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+acl reseau_local {
+	51.77.203.19;
+	51.77.203.6;
+	//fe80::f816:3eff:febd:97ac/64;
+};
+
+//pour controler le démon, ce que je ne vais pas faire pour question de simplicité et de sécurté
+controls {};
+
+
+
+
