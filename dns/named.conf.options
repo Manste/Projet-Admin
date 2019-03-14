@@ -1,9 +1,12 @@
+
+
+
 options {
 	// On lui indique d'écouter sur localhost (pour la résolution interne de la machine qui héberge le résolveur)
 	// ainsi que sur l'ip de la machine qui écoute sur le réseau local.
 	// Bien entendu, on écoute sur le port 53 car c'est la norme de base du DNS.
         
-	listen-on { 127.0.0.1; 51.77.203.6; 51.77.203.19; };
+	listen-on { 51.77.203.19; 51.77.203.6; 127.0.0.1; };
         port 53;
 	directory "/var/cache/bind";
 
@@ -28,51 +31,9 @@ options {
 	dnssec-validation auto;
 
 	auth-nxdomain no;    # conform to RFC1035
-	listen-on-v6 { fe80::f816:3eff:febd:97ac/64; };
+	listen-on-v6 { any; };
 
 	 // cette directive permet de mettre en place un résolveur. 		
 	recursion yes;
 };
-
-// Configuration des journaux systèmes (les logs)
-//Tout est loggué, y compris les requêtes DNS des clients
-// Les logs peuvent donc être très volumineux.
-logging {
-	// on commence à définir des "canaux" de logs: ce sont des définitions d'emplacement de fichiers
-        channel security_warning {
-        	// Les avertissements de sécurité iront dans /var/log/bind/security.log
-		// on garde 3 versions du fichier et on créé un nouveau fichier tous les 100ko
-                file "/var/log/bind/security.log" versions 3 size 100k;
-                severity warning;
-                print-severity  yes;
-                print-time      yes;
-         };
-
-         channel client_info {
-                 file "/var/log/bind/requests.log" versions 2 size 10m;
-                 severity info;
-                 print-severity  yes;
-                 print-time      yes;
-         };
-
-         channel bind_log {
-                 file "/var/log/bind/bind.log" versions 3 size 1m;
-                 severity info;
-                 print-category  yes;
-                 print-severity  yes;
-                 print-time      yes;
-         };
-
-     	// ensuite, on fait la répartition vers les fichiers en fonction de la catégorie
-
-         category default { bind_log; };
-    	 category client { client_info; };
-    	 category resolver { client_info; };
-     	 category queries { client_info; };
-         category lame-servers { null; };
-         category update { null; };
-         category update-security { null; };
-         category security { security_warning; }; 
-};
-
 
