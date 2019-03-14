@@ -1,18 +1,40 @@
 #Image de ubuntu
 
-FROM ubuntu:16.04
+FROM ubuntu:14.04.5
 
 # Dockerfile Maintainer
 
 MAINTAINER Darryl Bilongo "d.bilongo@students.ephec.be"
 
-RUN apt-get update && apt-get install --no-install-recommends nginx
+RUN apt-get update && apt-get install -y --no-install-recommends -y  nginx
 
-	echo "daemin off;" >> /etc/nginx/nginx.conf
+	# && apt-get -y install php7.0-fpm
 
-#copie des pages du site
+#copie des pages statiques du site
 
-COPY index.html /usr/share/nginx/html
+RUN mkdir -p /var/www/b2b.wt11.ephec-ti.be/
+
+RUN mkdir -p /var/www/wt11.ephec-ti.be/
+
+COPY index.html /var/www/b2b.wt11.ephec-ti.be/html/
+
+COPY index.html /var/www/wt11.ephec-ti.be/html/
+
+
+# Configurations des sites 
+
+COPY default.conf /etc/nginx/sites-available/
+
+COPY wt11.ephec-ti.be /etc/nginx/sites-available/
+
+COPY b2b.wt11.ephec-ti.be /etc/nginx/sites-available/
+
+# Enable both sites
+
+RUN sudo ln -s /etc/nginx/sites-available/wt11.ephec-ti.be /etc/nginx/sites-enabled/
+
+RUN sudo ln -s /etc/nginx/sites-available/b2b.wt11.ephec-ti.be /etc/nginx/sites-enabled/
+ 
 
 # Exposer les ports necessaires pour HTTP
 
@@ -20,4 +42,6 @@ EXPOSE 80 443
 
 # Lancer nginx
 
-CMD ["/usr/sbin/nginx"]
+# CMD nginx -t
+
+CMD nginx -g "daemon off;"
