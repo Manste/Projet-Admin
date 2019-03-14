@@ -9,12 +9,46 @@
 acl reseau_local {
 	51.77.203.19;
 	51.77.203.6;
-	//fe80::f816:3eff:febd:97ac/64;
+	localhost;
 };
 
 //pour controler le démon, ce que je ne vais pas faire pour question de simplicité et de sécurté
 controls {};
 
+view "internal"{
+	match-clients {reseau_local; };
+	recursion yes;
+	allow-recursion{reseau_local; };
+	
+	zone "w11.ephec-ti.be" {
+		type master;
+		file "/etc/bind/internals/db.w11.ephec-ti.be;
+	};
+
+	//mettre la zone pour le reverse
+	
+	zone "203.77.51.in-addr.arpa"{
+		type master;
+		file "/etc/bind/internals/db.w11.ephec-ti.be";
+	};
+	
+	include "/etc/bind/named.conf.default-zones";
+
+}
 
 
+view "external" {
+	match-clients {any; };
+	allow-query { any; };
+	recursion no;
+	
+	zone "w11.ephec-ti.be" {
+		type master;
+		file "/etc/bind/externals/db.w11.ephec-ti.be
+	}
 
+	zone "203.77.51.in-addr.arpa"{
+		type master;
+		file "/etc/bind/externals/db.203.77.51.in-addr.arpa
+	}
+}

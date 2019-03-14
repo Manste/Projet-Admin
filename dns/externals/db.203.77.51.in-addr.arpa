@@ -8,8 +8,11 @@ $ORIGIN 203.77.51.in-addr.arpa.
                                 	4619200    ; expire 
                                 	604800     ; minimum
                                 )
-
+;soa
 @		IN      NS		ns.w11.ephec-ti.be
-1		IN	PTR		ns.w11.ephec-ti.be
+19		IN	PTR		ns.w11.ephec-ti.be
 
-2		IN	PTR		mx.w11.ephec-ti.be
+;mail
+6		IN	PTR		mx.w11.ephec-ti.be
+
+		

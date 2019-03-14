@@ -1,10 +1,10 @@
 options {
 	// On lui indique d'écouter sur localhost (pour la résolution interne de la machine qui héberge le résolveur)
-    // ainsi que sur l'ip de la machine qui écoute sur le réseau local.
-   // Bien entendu, on écoute sur le port 53 car c'est la norme de base du DNS.
-        listen-on { 127.0.0.1; 51.77.203.6; 51.77.203.19; };
+	// ainsi que sur l'ip de la machine qui écoute sur le réseau local.
+	// Bien entendu, on écoute sur le port 53 car c'est la norme de base du DNS.
+        
+	listen-on { 127.0.0.1; 51.77.203.6; 51.77.203.19; };
         port 53;
-
 	directory "/var/cache/bind";
 
 	// If there is a firewall between you and nameservers you want
@@ -24,6 +24,7 @@ options {
 	// If BIND logs error messages about the root key being expired,
 	// you will need to update your keys.  See https://www.isc.org/bind-keys
 	//========================================================================
+	
 	dnssec-validation auto;
 
 	auth-nxdomain no;    # conform to RFC1035
@@ -37,14 +38,14 @@ options {
 //Tout est loggué, y compris les requêtes DNS des clients
 // Les logs peuvent donc être très volumineux.
 logging {
-    // on commence à définir des "canaux" de logs: ce sont des définitions d'emplacement de fichiers
-         channel security_warning {
-         // Les avertissements de sécurité iront dans /var/log/bind/security.log
-         // on garde 3 versions du fichier et on créé un nouveau fichier tous les 100ko
-                 file "/var/log/bind/security.log" versions 3 size 100k;
-                 severity warning;
-                 print-severity  yes;
-                 print-time      yes;
+	// on commence à définir des "canaux" de logs: ce sont des définitions d'emplacement de fichiers
+        channel security_warning {
+        	// Les avertissements de sécurité iront dans /var/log/bind/security.log
+		// on garde 3 versions du fichier et on créé un nouveau fichier tous les 100ko
+                file "/var/log/bind/security.log" versions 3 size 100k;
+                severity warning;
+                print-severity  yes;
+                print-time      yes;
          };
 
          channel client_info {
@@ -62,11 +63,12 @@ logging {
                  print-time      yes;
          };
 
-     // ensuite, on fait la répartition vers les fichiers en fonction de la catégorie
+     	// ensuite, on fait la répartition vers les fichiers en fonction de la catégorie
+
          category default { bind_log; };
-     category client { client_info; };
-     category resolver { client_info; };
-     category queries { client_info; };
+    	 category client { client_info; };
+    	 category resolver { client_info; };
+     	 category queries { client_info; };
          category lame-servers { null; };
          category update { null; };
          category update-security { null; };

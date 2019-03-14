@@ -14,3 +14,4 @@ $ORIGIN w11.ephec-ti.be.
 
 ns		IN	A		51.77.203.19
 mx		IN	A		51.77.203.6
+web		IN	A		51.77.203.19
