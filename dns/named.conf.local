@@ -1,10 +1,4 @@
-
-
-
-//
 // Do any local configuration here
-//
-
 // Consider adding the 1918 zones here, if they are not used in your
 // organization
 //include "/etc/bind/zones.rfc1918";
@@ -25,33 +19,31 @@ view "internal"{
 	
 	zone "w11.ephec-ti.be" {
 		type master;
-		file "/etc/bind/internals/db.w11.ephec-ti.be;
+		file "/etc/bind/internals/db.w11.ephec-ti.be";
 	};
 
 	//mettre la zone pour le reverse
 	
 	zone "203.77.51.in-addr.arpa"{
 		type master;
-		file "/etc/bind/internals/db.w11.ephec-ti.be";
+		file "/etc/bind/internals/db.203.77.51.in-addr.arpa";
 	};
 	
 	include "/etc/bind/named.conf.default-zones";
-
-}
-
+};
 
 view "external" {
 	match-clients {any; };
 	allow-query { any; };
 	recursion no;
 	
-	zone "w11.ephec-ti.be" {
+	zone "w11.ephec-ti.be"  IN {
 		type master;
-		file "/etc/bind/externals/db.w11.ephec-ti.be
-	}
+		file "/etc/bind/externals/db.w11.ephec-ti.be";
+	};
 
-	zone "203.77.51.in-addr.arpa"{
+	zone "203.77.51.in-addr.arpa" IN {
 		type master;
-		file "/etc/bind/externals/db.203.77.51.in-addr.arpa
-	}
-}
+		file "/etc/bind/externals/db.203.77.51.in-addr.arpa";
+	};
+};

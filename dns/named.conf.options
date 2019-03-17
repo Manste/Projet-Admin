@@ -28,12 +28,18 @@ options {
 	// you will need to update your keys.  See https://www.isc.org/bind-keys
 	//========================================================================
 	
-	dnssec-validation auto;
+	//Indique que l'on utilise un service de sécurité DNS
+	dnssec-enable yes;
+	
+	//Active le cryptage de chaque  enregistrement de notre fichier de zone
+	dnssec-validation yes;
+	
 
 	auth-nxdomain no;    # conform to RFC1035
 	listen-on-v6 { any; };
 
 	 // cette directive permet de mettre en place un résolveur. 		
+	//Ceci active la récursion
 	recursion yes;
 };
 
