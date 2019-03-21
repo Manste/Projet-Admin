@@ -1,12 +1,13 @@
-
-
-
 options {
 	// On lui indique d'écouter sur localhost (pour la résolution interne de la machine qui héberge le résolveur)
 	// ainsi que sur l'ip de la machine qui écoute sur le réseau local.
 	// Bien entendu, on écoute sur le port 53 car c'est la norme de base du DNS.
         
-	listen-on { 51.77.203.19; 51.77.203.6; 127.0.0.1; };
+	listen-on { 51.77.203.19; 
+		    51.77.203.6; 
+		    localhost;
+	};
+
         port 53;
 	directory "/var/cache/bind";
 
@@ -42,4 +43,3 @@ options {
 	//Ceci active la récursion
 	recursion yes;
 };
-
