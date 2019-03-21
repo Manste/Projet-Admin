@@ -6,14 +6,13 @@ FROM ubuntu: 16.04
 
 MAINTAINER "d.bilongo@students.ephec.be"
 
-
 # Installation et mise a jour
 
 RUN apt-get install -y \ 
 
-	mysql-server
+	&& DEBIAN_FRONTEND=noninteractive apt-get install mysql-server \
 
-RUN apt-get update
+	&&  apt-get update
 
 # Copie des fichiers bash && config
 
@@ -21,7 +20,15 @@ COPY entrypoint.sh /sbin/entrypoint.sh
 
 RUN chmod +x /sbin/entrypoint.sh
 
+RUN initDB.sh
+
+# Copy of the schema of the database
+
 COPY db_schema.sql /tmp/
+
+# VOLUME
+
+VOLUME ["/var/lib/mysql"]
 
 # Entrypoint
 
@@ -29,7 +36,7 @@ ENTRYPOINT ["/sbin/entrypoint.sh"]
 
 # Expose 
 
-EXPOSE 3306
+EXPOSE 3306/tcp
 
 # Lancement
 
