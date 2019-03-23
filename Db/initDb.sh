@@ -4,7 +4,7 @@
 
 service mysql start
 
-mysql -u root -p
+mysql -u root --password=mdp
 
 # Create the database
 
@@ -12,11 +12,4 @@ mysql < /tmp/db_schema.sql
 
 # start db
 
-set -e
-
-set -x
-
-# RUN
-
-/usr/sbin/mysqld
-~                     
+mysqladmin --password=mdp shutdown
