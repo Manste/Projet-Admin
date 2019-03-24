@@ -20,6 +20,7 @@ RUN mkdir -p /etc/bind/externals && \
 WORKDIR /etc/bind
 VOLUME /etc/bind
 
+COPY host.conf /etc/
 COPY named.conf.options /etc/bind/
 COPY named.conf.local /etc/bind/
 COPY log.conf /etc/bind/
