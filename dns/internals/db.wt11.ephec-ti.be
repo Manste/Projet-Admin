@@ -14,4 +14,5 @@ wt11.ephec-ti.be.		IN	MX		10 mail
 
 ns				IN	A		51.77.203.19
 mail				IN	A		51.77.203.6
-web				IN	A		51.77.203.19
+www				IN	A		51.77.203.19
+web				IN	CNAME		www

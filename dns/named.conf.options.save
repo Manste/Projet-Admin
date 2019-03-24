@@ -1,7 +1,6 @@
 options {
 	// On lui indique d'écouter sur localhost (pour la résolution interne de la machine qui héberge le résolveur)
-	// ainsi que sur l'ip de la machine qui écoute sur le réseau local.
-	// Bien entendu, on écoute sur le port 53 car c'est la norme de base du DNS.
+	// ainsi que sur l'ip de la machine qui écoute sur le réseau local.	// Bien entendu, on écoute sur le port 53 car c'est la norme de base du DNS.
         
 	listen-on { 51.77.203.19; 
 		    51.77.203.6; 
@@ -42,7 +41,4 @@ options {
 	 // cette directive permet de mettre en place un résolveur. 		
 	//Ceci active la récursion
 	recursion yes;
-
-	//Pour cacher la version de bind9
-	version	"Inconnu";
 };

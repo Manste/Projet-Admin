@@ -12,7 +12,7 @@ $ORIGIN 203.77.51.in-addr.arpa.
 @		IN      NS		ns.wt11.ephec-ti.be.
 19		IN	PTR		ns.wt11.ephec-ti.be.
 
-;mail
-6		IN	PTR		mail.wt11.ephec-ti.be.
 
-		
+6		IN	PTR		mail.wt11.ephec-ti.be.
+19		IN	PTR		www.wt11.ephec-ti.be.
+19 		IN	PTR		web.ephec-ti.be.
