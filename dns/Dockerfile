@@ -20,7 +20,7 @@ RUN mkdir -p /etc/bind/externals && \
 WORKDIR /etc/bind
 VOLUME /etc/bind
 
-COPY host.conf /etc/
+#COPY host.conf /etc/
 COPY named.conf.options /etc/bind/
 COPY named.conf.local /etc/bind/
 COPY log.conf /etc/bind/
@@ -34,5 +34,5 @@ COPY named.conf.default-zones /etc/bind/
 
 EXPOSE 53/tcp 53/udp
 
-CMD ["/usr/sbin/named", "-c", "/etc/bind/named.conf", "-fg"]
+CMD ["/usr/sbin/named", "-c", "/etc/bind/named.conf", "-f"]
 
