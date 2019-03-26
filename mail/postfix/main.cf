@@ -12,7 +12,10 @@ biff = no
 # appending .domain is the MUA's job.
 append_dot_mydomain = no
 
-#SASL parameters
+#SASL parameters(Dovecot SASL)
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_auth_enable = yes
 smtpd_sasl_local_domain =
 smtpd_sasl_auth_enable = yes
 smtpd_sasl_security_options = noanonymous
@@ -23,6 +26,9 @@ smtpd_recipient_restrictions = permit_sasl_authenticated,permit_mynetworks,rejec
 #delay_warning_time = 4h
 
 readme_directory = no
+
+#Cette commande placera les nouveaux messages dans /home/nomUser/Maildir. On doit configurer notre MDA pour qu'il utlise le même chemin
+home_mailbox = Maildir /
 
 # TLS parameters
 smtpd_tls_auth_only = no
@@ -46,13 +52,13 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
-smtpd_relay_restrictions = 
+#smtpd_relay_restrictions = 
 myhostname = mail.wt11.ephec-ti.be
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 mydestination = mail.wt11.ephec-ti.be, localhost.wt11.ephec-ti.be, localhost
 relayhost = 
-mynetworks = 127.0.0.0/8 [::1]/128 [fe80::]/64
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_command = procmail -a "$EXTENSION"
 mailbox_size_limit = 0
 recipient_delimiter = +
