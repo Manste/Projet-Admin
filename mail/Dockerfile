@@ -8,20 +8,23 @@ MAINTAINER "d.bilongo@students.ephec.be"
 
 # Installation of the dependencies
 
-RUN apt-get update -y && apt-get install -y postfix postfix-mysql #&& apt-get install -y mysql-server
+RUN apt-get update && \
+        DEBIAN_FRONTEND=noninteractive apt-get -y -q install postfix postfix-mysql --no-install-recommends
+
+# working directory
+
+#WORKDIR /etc/postfix
+
+#VOLUME /etc/postfix
 
 # ajouter les fichiers necessaires
 
-COPY setup.sh /tmp/
+COPY /config/postconfig.cf /tmp/
 
-RUN chmod +x /tmp/setup.sh
+RUN chmod +x /tmp/postconfig.cf
 
-RUN /tmp/setup.sh
+RUN /tmp/postconfig.cf
 
 # Expose
 
 EXPOSE 25
-
-# OK
-
-CMD ["service postfix restart"]
