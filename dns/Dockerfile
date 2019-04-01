@@ -15,7 +15,9 @@ RUN mkdir -p /etc/bind/externals && \
 	touch /var/log/bind/requests.log  &&\
 	touch /var/log/bind/bind.log &&\
 	chown -R bind /var/log/bind &&\
-	chmod u+rw /var/log/bind 
+	chmod u+rw /var/log/bind &&\
+	mkdir -p /etc/pmta/ &&\
+	touch /etc/pmta/key1.wt11.ephec-ti.be.pem
 
 WORKDIR /etc/bind
 VOLUME /etc/bind
@@ -29,10 +31,13 @@ COPY ./internals/db.203.77.51.in-addr.arpa /etc/bind/internals/
 COPY ./externals/db.wt11.ephec-ti.be /etc/bind/externals/
 COPY ./internals/db.wt11.ephec-ti.be /etc/bind/internals/
 
+#DKIM
+COPY key1.wt11.ephec-ti.be.pem /etc/pmta/
+
 COPY named.conf	/etc/bind/
 COPY named.conf.default-zones /etc/bind/
 
 EXPOSE 53/tcp 53/udp
 
-CMD ["/usr/sbin/named", "-c", "/etc/bind/named.conf", "-f"]
+CMD ["/usr/sbin/named", "-c", "/etc/bind/named.conf", "-fg"]
 

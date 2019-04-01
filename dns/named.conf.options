@@ -1,8 +1,5 @@
 options {
-	// On lui indique d'écouter sur localhost (pour la résolution interne de la machine qui héberge le résolveur)
-	// ainsi que sur l'ip de la machine qui écoute sur le réseau local.
-	// Bien entendu, on écoute sur le port 53 car c'est la norme de base du DNS.
-        
+	// On lui indique d'écouter sur localhost (pour la résolution interne de la machine qui héberge le résolveur)        
 	listen-on { 51.77.203.19; 
 		    51.77.203.6; 
 		    localhost;
@@ -34,7 +31,7 @@ options {
 	
 	//Active le cryptage de chaque  enregistrement de notre fichier de zone
 	dnssec-validation yes;
-	
+	//dnssec-lookside auto;
 
 	auth-nxdomain no;    # conform to RFC1035
 	listen-on-v6 { any; };
