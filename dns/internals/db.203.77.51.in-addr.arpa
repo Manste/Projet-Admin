@@ -14,4 +14,5 @@ $ORIGIN 203.77.51.in-addr.arpa.
 
 6			IN	PTR		mail.wt11.ephec-ti.be.
 19                      IN      PTR             www.wt11.ephec-ti.be.
-
+19			IN	PTR		b2b.wt11.ephec-ti.be.
+19			IN	PTR		intranet.wt11.ephec-ti.be.
