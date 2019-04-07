@@ -9,10 +9,14 @@ $ORIGIN wt11.ephec-ti.be.
                                 	604800     ; minimum 
                                 )
 
-wt11.ephec-ti.be.		IN	NS		ns.wt11.ephec-ti.be.
-wt11.ephec-ti.be.		IN	MX		10 mail
+wt11.ephec-ti.be.			IN	NS		ns.wt11.ephec-ti.be.
+wt11.ephec-ti.be.			IN	MX		10 mail
 
-ns				IN	A		51.77.203.19
-mail				IN	A		51.77.203.6
-www				IN	A		51.77.203.19
-web				IN	CNAME		www
+ns					IN	A		51.77.203.19
+mail					IN	A		51.77.203.6
+www					IN	A		51.77.203.19
+b2b					IN	CNAME		www
+intranet				IN	CNAME		www
+
+;SPF
+@                                      IN      TXT             "v=spf1 +a +mx -all"
