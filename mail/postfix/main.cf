@@ -6,7 +6,13 @@
 # is /etc/mailname.
 
 #****myorigin indique le domaine qui apparaît dans le courrier envoyé à partir de cette machine.
-myorigin = </etc/mailname
+mail_name = PiouPiou
+mail_version = 6.6.6
+
+#myorigin = </etc/mailname
+myorigin = wt11.ephec-ti.be
+mydomain = wt11.ephec-ti.be
+myhostname = mail.$mydomain
 
 smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
 biff = no
@@ -26,22 +32,36 @@ smtpd_use_tls=yes
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
+smtpd_sasl_auth_enable = yes
+smtpd_recipient_restrictions = permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination
+smtpd_sasl_security_options = noanonymous
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
-myhostname = mail.wt11.ephec-ti.be
-mydomain = wt11.ephec-ti.be
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 
 #mydestination: indique les domaines pour lesquels cette machine délivrera le courrier localement, au lieu de le trensmettre à une autre machine.
-mydestination = mail.wt11.ephec-ti.be, localhost.wt11.ephec-ti.be, localhost, wt11.ephec-ti.be
+mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
 relayhost = 
-mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all
 inet_protocols = all
 home_mailbox = Maildir/
+
+#virtual_transport = lmtp:unix:/var/run/dovecot/lmtp
+virtual_mailbox_domains = /etc/postfix/vhost
+virtual_mailbox_maps = texthash:/etc/postfix/vmailbox
+virtual_alias_maps = texthash:/etc/postfix/virtual
+
+#milter_protocol = 2
+#milter_default_action = accept
+#smtpd_milters = unix:/spamass/spamass.sock, inet:localhost:12301
+#non_smtpd_milters = unix:/spamass/spamass.sock, inet:localhost:12301
 
