@@ -20,7 +20,8 @@ RUN apt-get update -y \
 
 # Copie des fichiers bash && config & Copy of the schema of the database
 
-COPY initDb.sh db_schema.sql entrypoint.sh /tmp/
+COPY initDb.sh entrypoint.sh /tmp/
+COPY db_schema.sql /tmp/
 
 RUN chmod +x /tmp/initDb.sh && chmod +x /tmp/entrypoint.sh
 

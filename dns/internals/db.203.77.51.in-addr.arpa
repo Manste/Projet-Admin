@@ -1,7 +1,7 @@
 
 $TTL 604800
 $ORIGIN 203.77.51.in-addr.arpa.
-@       	IN 	SOA  	ns.wt11.ephec-ti.be. admin.wt11.ephec-ti.be. (
+@       	IN 	SOA  	ns.wt11.ephec-ti.be. admin@t11.ephec-ti.be. (
                                 	2	   ;serial
                                 	3600       ; refresh 
                                 	300        ; retry 

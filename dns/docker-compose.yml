@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  mail:
+    #image: manste/mail_image:latest
+    build: .
+    tty: true
+    hostname: ns
+    domainname: wt11.ephec-ti.be
+    container_name: dns_container
+    ports:
+       - "53:53"
