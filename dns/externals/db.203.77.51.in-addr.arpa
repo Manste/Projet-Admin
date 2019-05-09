@@ -4,9 +4,9 @@ $ORIGIN 203.77.51.in-addr.arpa.
 @       	IN 	SOA  	ns.wt11.ephec-ti.be. admin@wt11.ephec-ti.be. (
                                 	1	   ;serial
                                 	3600       ; refresh 
-                                	300        ; retry 
-                                	4619200    ; expire 
-                                	604800     ; minimum
+                                	600        ; retry 
+                                	1209600    ; expire 
+                                	3600	    ; minimum
                                 )
 ;soa
 @		IN      NS		ns.wt11.ephec-ti.be.

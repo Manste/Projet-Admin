@@ -4,13 +4,14 @@
 
 service mysql start
 
-mysql -u root -p mdp
+mysql -u root --password=mdp
 
 # Create the database
 
-mysql -u root -p mdp < /tmp/db_schema.sql
+mysql --password=mdp < /tmp/db_schema.sql
+
+#mysql SELECT host FROM mysql.user WHERE User = 'root';
 
 # start db
 
 mysqladmin --password=mdp shutdown
-

@@ -20,8 +20,9 @@ RUN apt-get update -y \
 
 # Copie des fichiers bash && config & Copy of the schema of the database
 
-COPY initDb.sh entrypoint.sh /tmp/
-COPY db_schema.sql /tmp/
+COPY initDb.sh db_schema.sql entrypoint.sh /tmp/
+
+COPY mysqld.cnf /etc/mysql/mysql.conf.d/
 
 RUN chmod +x /tmp/initDb.sh && chmod +x /tmp/entrypoint.sh
 
@@ -35,7 +36,3 @@ EXPOSE 3306/tcp
 
 ENTRYPOINT "/tmp/entrypoint.sh"
 
-
-# Lancement
-
-# CMD ["/usr/bin/mysqld_safe"]

@@ -3,7 +3,7 @@ FROM ubuntu:14.04.5
 MAINTAINER Manuelle Ndamtang <m.ndamtang@students.ephec.be>
 
 RUN apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get -y -q install bind9 bind9utils dnsutils bind9-doc openssl opendkim opendkim-tools  --no-install-recommends && \
+	DEBIAN_FRONTEND=noninteractive apt-get -y -q install bind9 bind9utils dnsutils bind9-doc --no-install-recommends && \
 	cat /etc/bind/named.conf.options 
 
 
