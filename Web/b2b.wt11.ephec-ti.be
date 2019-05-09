@@ -40,6 +40,8 @@ server {
 
         listen [::]:80;
 
+	root /var/www/b2b.wt11.ephec-ti.be/html/;
+
         server_name b2b.wt11.ephec-ti.be www.b2b.wt11.ephec-ti.be;
 
         # return 301 https://wt1.ephec-ti.be$request_uri;

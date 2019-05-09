@@ -10,8 +10,6 @@ mysql -u root --password=mdp
 
 mysql --password=mdp < /tmp/db_schema.sql
 
-#mysql SELECT host FROM mysql.user WHERE User = 'root';
-
 # start db
 
 mysqladmin --password=mdp shutdown
