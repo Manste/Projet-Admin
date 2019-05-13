@@ -28,6 +28,3 @@ service mysql start
 #service postfix restart
 /etc/init.d/mysql start
 
-cd /var/www/html/
- rm index.html 
-curl -sL https://repository.rainloop.net/installer.php | php
