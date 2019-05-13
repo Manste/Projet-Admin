@@ -16,7 +16,7 @@ ENABLED=1
 
 #OPTIONS="--create-prefs --max-children 5 --helper-home-dir"
 SPAMD_HOME="/home/spamd/"
-OPTIONS="--create-prefs --ipv4 --max-children 5 --username spamd --helper-home-dir ${SPAMD_HOME} -s ${SPAMD_HOME}spamd.log"
+OPTIONS="--create-prefs -4 --ipv4 --max-children 5 --username spamd --helper-home-dir ${SPAMD_HOME} -s ${SPAMD_HOME}spamd.log"
 
 # Pid file
 # Where should spamd write its PID to file? If you use the -u or

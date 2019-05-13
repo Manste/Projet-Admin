@@ -1,21 +1,15 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
 MAINTAINER Manuelle Ndamtang <m.ndamtang@students.ephec.be>
 
-RUN apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get -y -q install postfix postfix-mysql dovecot-mysql sasl2-bin mailutils mail-stack-delivery binutils opendkim clamav opendkim-tools opendmarc spamassassin spamc --no-install-recommends 
+#RUN apt-get update && \
+#	DEBIAN_FRONTEND=noninteractive apt-get -y -q install postfix postfix-mysql dovecot-mysql sasl2-bin mailutils mail-stack-delivery dovecot-core binutils opendkim clamav opendkim-tools opendmarc spamassassin spamc --no-install-recommends 
 
-ADD imap-2006b.tar.Z /imap-2006b.tar.Z
+RUN apt-get update &&\
+	DEBIAN_FRONTEND=noninteractive apt-get -y -q install postfix postfix-mysql dovecot-core dovecot-pop3d dovecot-imapd dovecot-lmtpd dovecot-mysql mailutils mysql-server binutils net-tools telnet --no-install-recommends
 
-RUN tar -xzvf imap-2006b.tar.Z 	
-
-COPY qc?mailtools.anomy.net%2Fdist%2Fanomy-sanitizer-1.76.tar.gz /etc/postfix
-
-RUN tar -xzvf /etc/postfix/qc?mailtools.anomy.net%2Fdist%2Fanomy-sanitizer-1.76.tar.gz 
-
-#ADD virtual /etc/postfix/virtual
-
-#RUN postmap /etc/postfix/virtual
+ADD config.sh ./postfix/mysql-virtual-mailbox-maps.cf ./postfix/mysql-virtual-mailbox-domains.cf ./postfix/mysql-virtual-alias-maps.cf /tmp/
+RUN chmod +x /tmp/config.sh 
 
 WORKDIR /etc/postfix
 VOLUME /etc/postfix
@@ -23,39 +17,68 @@ VOLUME /etc/postfix
 COPY ./postfix/main.cf .
 COPY ./postfix/master.cf .    
 
-COPY ./dovecot/dovecot.conf /etc/dovecot/dovecot.conf
+#RUN /tmp/config.sh
 
-WORKDIR /usr/share/ssl/certs
-VOLUME /usr/share/ssl/certs
+WORKDIR /etc/dovecot
+VOLUME /etc/dovecot
 
-EXPOSE 25 143 465 993 110 995 783
+COPY ./dovecot/dovecot.conf . 
+COPY ./dovecot/dovecot-sql.conf.ext .
 
-RUN adduser spamd --disabled-login
-COPY ./spamassassin/local.cf /etc/spamassassin/
-COPY ./spamassassin/spamassassin /etc/default/spamassassin
+WORKDIR /etc/dovecot/conf.d
+VOLUME /etc/dovecot/conf.d
 
-RUN mkdir -p /etc/opendkim &&\
-        mkdir -p /etc/opendkim/keys &&\
-        touch /etc/opendkim/TrustedHosts &&\
-        touch /etc/opendkim/KeyTable &&\
-        touch /etc/opendkim/SigningTable &&\
-        mkdir /etc/opendkim/keys/wt11.ephec-ti.be/ &&\
-        touch /etc/opendkim/keys/wt11.ephec-ti.be/key.txt &&\
-        touch /etc/opendkim/keys/wt11.ephec-ti.be/key.private
+COPY ./dovecot/auth-sql.conf.ext .
+COPY ./dovecot/10-mail.conf .
+COPY ./dovecot/10-master.conf .
+COPY ./dovecot/10-auth.conf .
+COPY ./dovecot/10-mail.conf .
+COPY ./dovecot/10-ssl.conf .
+
+ADD ./postfix/mysql-virtual-mailbox-domains.cf /etc/postfix
+
+#Pour s'assurer que Postfix trouve le domaine
+RUN postmap -q wt11.ephec-ti.be mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf
+
+ADD ./postfix/mysql-virtual-mailbox-maps.cf /etc/postfix
+
+#Pour le moment , nous allons nous assurer que Postfix trouve votre première adresse e-mail avec la cette commande
+RUN postmap -q contact@wt11.ephec-ti.be mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf
+
+ADD ./postfix/mysql-virtual-alias-maps.cf /etc/postfix
+
+RUN postmap -q b2b@wt11.ephec-ti.be mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf
+
+RUN /tmp/config.sh
+
+EXPOSE 25 143 465 993 110 995 783 23 3306
+
+#RUN adduser spamd --disabled-login
+#COPY ./spamassassin/local.cf /etc/spamassassin/
+#COPY ./spamassassin/spamassassin /etc/default/spamassassin
+
+#RUN mkdir -p /etc/opendkim &&\
+   #     mkdir -p /etc/opendkim/keys &&\
+  #      touch /etc/opendkim/TrustedHosts &&\
+ #       touch /etc/opendkim/KeyTable &&\
+#        touch /etc/opendkim/SigningTable &&\
+   #     mkdir /etc/opendkim/keys/wt11.ephec-ti.be/ &&\
+  #      touch /etc/opendkim/keys/wt11.ephec-ti.be/key.txt &&\
+ #       touch /etc/opendkim/keys/wt11.ephec-ti.be/key.private
 
 #DKIM
-COPY /opendkim/TrustedHosts /etc/opendkim/
-COPY /opendkim/opendkim.conf /etc/
-COPY /opendkim/SigningTable /etc/opendkim/
+#COPY /opendkim/TrustedHosts /etc/opendkim/
+#COPY /opendkim/opendkim.conf /etc/
+#COPY /opendkim/SigningTable /etc/opendkim/
 
 #on génère les clés
 #-s indique le sélecteur, ici dans notre cas il s’agit de key1
 #-d le domaine
-RUN opendkim-genkey -s key -d wt11.ephec-ti.be
+#RUN opendkim-genkey -s key -d wt11.ephec-ti.be
 
-COPY /opendkim/key.private /etc/opendkim/keys/wt11.ephec-ti.be/
-COPY /opendkim/key.txt /etc/opendkim/keys/wt11.ephec-ti.be/
+#COPY /opendkim/key.private /etc/opendkim/keys/wt11.ephec-ti.be/
+#COPY /opendkim/key.txt /etc/opendkim/keys/wt11.ephec-ti.be/
 
 #Pour attribuer le bon utilisateur et groupe au fichier clé privée
-RUN chown opendkim:opendkim /etc/opendkim/keys/wt11.ephec-ti.be/key.private
+#RUN chown opendkim:opendkim /etc/opendkim/keys/wt11.ephec-ti.be/key.private
 

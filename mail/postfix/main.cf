@@ -6,11 +6,11 @@
 # is /etc/mailname.
 
 #****myorigin indique le domaine qui apparaît dans le courrier envoyé à partir de cette machine.
-mail_name = PiouPiou
-mail_version = 6.6.6
+#mail_name = PiouPiou
+#mail_version = 7.7.7
 
 #myorigin = </etc/mailname
-myorigin = wt11.ephec-ti.be
+#myorigin = wt11.ephec-ti.be
 mydomain = wt11.ephec-ti.be
 myhostname = mail.$mydomain
 
@@ -26,39 +26,44 @@ append_dot_mydomain = no
 readme_directory = no
 
 # TLS parameters
-smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+#smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+#smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+#smtpd_use_tls=yes
+#smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+#smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtpd_tls_cert_file=/etc/ssl/certs/dovecot.pem
+smtpd_tls_key_file=/etc/ssl/private/dovecot.pem
 smtpd_use_tls=yes
-smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
-smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtpd_tls_auth_only = yes
 
 smtpd_sasl_auth_enable = yes
-smtpd_recipient_restrictions = permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination
+smtpd_recipient_restrictions = permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination 
 smtpd_sasl_security_options = noanonymous
 smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/auth
 
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
-
-smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 
 #mydestination: indique les domaines pour lesquels cette machine délivrera le courrier localement, au lieu de le trensmettre à une autre machine.
-mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+#mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+mydestination = localhost
 relayhost = 
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all
-inet_protocols = all
-home_mailbox = Maildir/
+inet_protocols = ipv4 
+#home_mailbox = Maildir/
 
-#virtual_transport = lmtp:unix:/var/run/dovecot/lmtp
-virtual_mailbox_domains = /etc/postfix/vhost
-virtual_mailbox_maps = texthash:/etc/postfix/vmailbox
-virtual_alias_maps = texthash:/etc/postfix/virtual
+#virtual_alias_maps = hash:/etc/aliases
+
+virtual_transport = lmtp:unix:private/dovecot-lmtp
+virtual_mailbox_domains = mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf
+virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf
+virtual_alias_maps = mysql:/etc/postfix/mysql-virtual-alias-maps.cf
 
 #milter_protocol = 2
 #milter_default_action = accept
