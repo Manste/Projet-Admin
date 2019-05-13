@@ -34,7 +34,3 @@ EXPOSE 3306/tcp
 
 ENTRYPOINT "/tmp/entrypoint.sh"
 
-
-# Lancement
-
-# CMD ["/usr/bin/mysqld_safe"]
