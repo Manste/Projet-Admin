@@ -8,7 +8,7 @@ mysql -u root --password=mdp
 
 # Create the database
 
-mysql < /tmp/db_schema.sql
+mysql --password=mdp < /tmp/db_schema.sql
 
 # start db
 
