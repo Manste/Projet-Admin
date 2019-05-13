@@ -27,3 +27,7 @@ key._domainkey				IN	TXT	 	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQ
 ;DMARC
 _dmarc					IN	TXT		"v=DMARC1;p=none;sp=reject;pct=100;aspf=r;fo=0;ri=86400;rua=mailto:dmarc@wt11.ephec-ti.be;"
 
+;sip
+_sip.udp				IN	SRV	0	0	6201 	mail
+
+
