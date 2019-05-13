@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  mail:
+    #image: manste/mail_image:latest
+    build: .
+    #Vue que j'utilise bash comme invite de commande mais sans terminal, il se fermera immédiatement. 
+    #C'est pourquoi j'utilise tty comme comme terminale dans la definition du service
+    # mieux expliqué ici : https://stackoverflow.com/questions/42593396/docker-compose-up-is-starting-the-container-and-immediately-stopping-them
+    tty: true
+    hostname: mail
+    domainname: wt11.ephec-ti.be
+    dns: 
+       - 51.77.203.19
+    dns_search: wt11.ephec-ti.be
+    container_name: mail_container
+    ports:
+#Pour recevoir les emails
+      - "25:25"
+#pour les clients POP3
+      - "110:110"
+#Pour les clients IMAP 143
+      - "143:143"
+

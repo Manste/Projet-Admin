@@ -1,0 +1,3 @@
+key._domainkey	IN	TXT	( "v=DKIM1; k=rsa; "
+	  "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDXxkYv6tUzkxnjtTWPpGZy3vN7Whyy+rqGrvm5t289C2csZUeyxmdUdTPZQu9iYk6xtcHDqOQM7k++2aKO3rHVbOTLTP8BJfiMPHD+4o2sInNZ/jGDNQn0PNhmb7pFjUX5pz+2xXKOyanyB3c/+EcTc2gCscHhPOkt3UGvl3suHQIDAQAB" )  ; ----- DKIM key key for wt11.ephec-ti.be
+
