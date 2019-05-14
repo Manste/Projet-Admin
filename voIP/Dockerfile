@@ -25,6 +25,10 @@ COPY voicemail.conf /etc/asterisk/
 
 COPY rtp.conf /etc/asterisk/
 
+# Exposition port
+
+EXPOSE 5060 5060/udp
+
 # lancer asterisk
 
 ENTRYPOINT [ "/usr/sbin/asterisk", "-f" ]
