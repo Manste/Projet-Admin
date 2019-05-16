@@ -1,5 +1,5 @@
 # /etc/default/spamassassin
-# Duncan Findlay
+# Duncan Findlay loic
 
 # WARNING: please read README.spamd before using.
 # There may be security risks.
