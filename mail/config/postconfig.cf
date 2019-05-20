@@ -1,5 +1,11 @@
 # /etc/init.d/postfix stop
 
+echo "mail.wt11.ephec-ti.be" > /etc/hostname
+
+echo "127.0.0.1 localhost.localdomain localhost" > /etc/hosts
+
+echo "51.77.203.6 mail.wt11.ephec-ti.be" >> /etc/hosts
+
 # Configuration
 
 postconf -e "myhostname=mail.wt11.ephec-ti.be"
@@ -8,16 +14,14 @@ postconf -e "mydomain=wt11.ephec-ti.be"
 
 postconf -e "myorigin=$mydomain"
 
-postconf -e "mydestination = wt11.ephec-ti.be localhost.$mydomain localhost"
+postconf -e "mydestination = wt11.ephec-ti.be, localhost.$mydomain, localhost"
 
 postconf -e "inet_interfaces=all" 
 
-postconf -e "inet_protocols=ipv4" 
+postconf -e "inet_protocols=all" 
 
 postconf -e "mailbox_size_limit=0"
 
-postconf -e "mynetworks=127.0.0.0/8"
+postconf -e "home_mail = Maildir/"
 
-# configuration
 
-postfix restart
