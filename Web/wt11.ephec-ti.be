@@ -8,9 +8,9 @@ server {
 
 	server_name wt11.ephec-ti.be www.wt11.ephec-ti.be;
 	
+	root /var/www/wt11.ephec-ti.be/html/;	
+
 	index index.html index.htm index.php;
-	
-	root /var/www/wt11.ephec-ti.be/html/;
 	
 	# Location des du fichier racine
 
@@ -44,6 +44,10 @@ server {
 	listen [::]:80;
 
 	server_name wt11.ephec-ti.be www.wt11.ephec-ti.be;
+
+	root /var/www/wt11.ephec-ti.be/html/;
+
+	index index.html index.htm index.php;
 
 	# return 301 https://wt1.ephec-ti.be$request_uri;
 

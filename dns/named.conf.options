@@ -1,12 +1,10 @@
-
-
-
 options {
-	// On lui indique d'écouter sur localhost (pour la résolution interne de la machine qui héberge le résolveur)
-	// ainsi que sur l'ip de la machine qui écoute sur le réseau local.
-	// Bien entendu, on écoute sur le port 53 car c'est la norme de base du DNS.
-        
-	listen-on { 51.77.203.19; 51.77.203.6; 127.0.0.1; };
+	// On lui indique d'écouter sur localhost (pour la résolution interne de la machine qui héberge le résolveur)        
+	listen-on { 51.77.203.19; 
+		    51.77.203.6; 
+		    localhost;
+	};
+
         port 53;
 	directory "/var/cache/bind";
 
@@ -28,12 +26,20 @@ options {
 	// you will need to update your keys.  See https://www.isc.org/bind-keys
 	//========================================================================
 	
-	dnssec-validation auto;
+	//Indique que l'on utilise un service de sécurité DNS
+	dnssec-enable yes;
+	
+	//Active le cryptage de chaque  enregistrement de notre fichier de zone
+	dnssec-validation yes;
+	//dnssec-lookside auto;
 
 	auth-nxdomain no;    # conform to RFC1035
 	listen-on-v6 { any; };
 
 	 // cette directive permet de mettre en place un résolveur. 		
+	//Ceci active la récursion
 	recursion yes;
-};
 
+	//Pour cacher la version de bind9
+	version	"Inconnu";
+};

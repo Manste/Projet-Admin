@@ -1,0 +1,5 @@
+user = admin
+password = password
+hosts = 51.77.203.19
+dbname = WoodyToys
+query = SELECT 1 FROM virtual_users WHERE email='%s'
