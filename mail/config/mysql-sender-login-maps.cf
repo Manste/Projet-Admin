@@ -1,0 +1,9 @@
+hosts = 127.0.0.1
+
+user = postfix
+
+password = mdp
+
+dbname = postfix
+
+query = SELECT username FROM mailbox WHERE username='%s' AND active = 1
