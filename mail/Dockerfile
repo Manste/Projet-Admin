@@ -58,7 +58,7 @@ RUN mkdir -p /etc/opendkim/ &&\
                                                                
 RUN /tmp/config.sh
 
-EXPOSE 25 143 465 993 110 995 783 23 3306
+EXPOSE 25 143 465 993 110 995 3306
 
 RUN adduser spamd --disabled-login
 COPY ./spamassassin/local.cf /etc/spamassassin/
