@@ -25,6 +25,8 @@ COPY voicemail.conf /etc/asterisk/
 
 COPY rtp.conf /etc/asterisk/
 
+COPY features.conf /etc/asterisk/
+
 # Exposition port
 
 EXPOSE 5060 5060/udp
