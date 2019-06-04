@@ -1,24 +1,10 @@
 #
-<<<<<<< HEAD
-# The MySQL database server configuration file.
-=======
 # M The MySQL database server configuration file.
->>>>>>> 8288eb70e5a069d5e8ffa84e63118a9e250eff33
 #
 # You can copy this to one of:
 # - "/etc/mysql/my.cnf" to set global options,
 # - "~/.my.cnf" to set user-specific options.
 # 
-<<<<<<< HEAD
-# One can use all long options that the program supports.
-# Run program with --help to get a list of available options and with
-# --print-defaults to see which it would actually understand and use.
-#
-# For explanations see
-# http://dev.mysql.com/doc/mysql/en/server-system-variables.html
-
-# This will be passed to all mysql clients
-=======
 # A One can use all long options that the program supports.
 # Run program with --help to get a list of available options and with
 # --print-defaults to see which it would actually understand and use.
@@ -27,16 +13,11 @@
 # http://dev.mysql.com/doc/mysql/en/server-system-variables.html
 
 # O This will be passed to all mysql clients
->>>>>>> 8288eb70e5a069d5e8ffa84e63118a9e250eff33
 # It has been reported that passwords should be enclosed with ticks/quotes
 # escpecially if they contain "#" chars...
 # Remember to edit /etc/mysql/debian.cnf when changing the socket location.
 
-<<<<<<< HEAD
-# Here is entries for some specific programs
-=======
 # U Here is entries for some specific programs
->>>>>>> 8288eb70e5a069d5e8ffa84e63118a9e250eff33
 # The following values assume you have at least 32M ram
 
 [mysqld_safe]
@@ -121,4 +102,3 @@ max_binlog_size   = 100M
 # ssl-ca=/etc/mysql/cacert.pem
 # ssl-cert=/etc/mysql/server-cert.pem
 # ssl-key=/etc/mysql/server-key.pem
-
