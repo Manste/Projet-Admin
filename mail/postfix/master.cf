@@ -9,8 +9,10 @@
 # service type  private unpriv  chroot  wakeup  maxproc command + args
 #               (yes)   (yes)   (yes)   (never) (100)
 # ==========================================================================
-smtp      inet  n       -       -       -       -       smtpd
-25	  inet  n 	-	n	-	-	smtpd
+smtp      inet  n       -       -       -       -       smtpd -o content_filter=spamassassin
+25       inet  n       -       n       -       -       smtpd -o content_filter=spamassassin
+spamassassin unix -     n       n       -       -       pipe user=spamd argv=/usr/bin/spamc -f -e /usr/sbin/sendmail -oi -f ${sender} ${recipient}
+#25	  inet  n 	-	n	-	-	smtpd
 #smtp      inet  n       -       -       -       1       postscreen
 #smtpd     pass  -       -       -       -       -       smtpd
 #dnsblog   unix  -       -       -       -       0       dnsblog
@@ -27,7 +29,7 @@ submission inet n       -       -       -       -       smtpd
 #  -o smtpd_recipient_restrictions=
 #  -o smtpd_relay_restrictions=permit_sasl_authenticated,reject
 #  -o milter_macro_daemon_name=ORIGINATING
-#smtps     inet  n       -       -       -       -       smtpd
+smtps     inet  n       -       -       -       -       smtpd
 #  -o syslog_name=postfix/smtps
 #  -o smtpd_tls_wrappermode=yes
 #  -o smtpd_sasl_auth_enable=yes

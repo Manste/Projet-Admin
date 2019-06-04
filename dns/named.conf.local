@@ -16,6 +16,7 @@ view "internal"{
 	match-clients {reseau_local; };
 	recursion yes;
 	allow-recursion{reseau_local; };
+	allow-query{reseau_local; };
 	
 	zone "wt11.ephec-ti.be" {
 		type master;

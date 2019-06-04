@@ -13,3 +13,4 @@ mysql --password=mdp < /tmp/db_schema.sql
 # start db
 
 mysqladmin --password=mdp shutdown
+

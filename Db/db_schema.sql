@@ -42,10 +42,17 @@ VALUES
 INSERT INTO `WoodyToys`.`virtual_users`
 (`id`, `domain_id`,`nom`, `prenom`, `fonction`, `password` , `email`)
 VALUES
+<<<<<<< HEAD
 ('1', '1', 'service secretariat', NULL, 'SECRETARIAT', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'contact@wt11.ephec-ti.be'),
 ('2', '1', 'service commercial', NULL, 'COMMERCIAUX', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'b2b@wt11.ephec-ti.be'),
 ('3', '1', 'Manou', 'Stévia', 'DESIGNER', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'manou.stevia@wt11.ephec-ti.be'),
 ('4', '1', 'Admin', NULL, 'Service Informatique', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'admin@wt11.ephec-ti.be');
+=======
+('1', '1', 'contact', NULL, 'SECRETARIAT', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'contact@wt11.ephec-ti.be'),
+('2', '1', 'b2b', NULL, 'COMMERCIAL', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'b2b@wt11.ephec-ti.be'),
+('3', '1', 'manou', 'Stévia', 'DESIGNER', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'manou.stevia@wt11.ephec-ti.be'),
+('4', '1', 'admin', NULL, 'Service Informatique', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'admin@wt11.ephec-ti.be');
+>>>>>>> 8288eb70e5a069d5e8ffa84e63118a9e250eff33
 
 INSERT INTO `WoodyToys`.`virtual_aliases`
 (`id`, `domain_id`, `source`, `destination`)
@@ -58,9 +65,8 @@ VALUES
 /*create user 'admin'@'%' identified by 'password';
 
 grant all privileges on *.* to 'admin'@'%';*/
-GRANT ALL ON WoodyToys.* TO 'admin'@'51.77.203.6' IDENTIFIED BY 'password' WITH GRANT OPTION;
 
+GRANT ALL ON WoodyToys.* TO 'admin'@'51.77.203.6' IDENTIFIED BY 'password' WITH GRANT OPTION;
 -- FLUSH
 
 flush privileges;
-

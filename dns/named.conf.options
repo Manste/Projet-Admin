@@ -1,7 +1,6 @@
 options {
 	// On lui indique d'écouter sur localhost (pour la résolution interne de la machine qui héberge le résolveur)        
 	listen-on { 51.77.203.19; 
-		    51.77.203.6; 
 		    localhost;
 	};
 

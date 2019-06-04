@@ -1,7 +1,7 @@
 
 $TTL 604800 
 $ORIGIN wt11.ephec-ti.be.
-@		IN 	SOA 	ns.wt11.ephec-ti.be. admin@wt11.ephec-ti.be. (
+@		IN 	SOA 	ns.wt11.ephec-ti.be. admin.wt11.ephec-ti.be. (
 					1	   ;serial
 					3600       ; refresh
 		                             6     ; retry 
@@ -19,15 +19,17 @@ b2b					IN	CNAME		www
 intranet				IN	CNAME		www
 
 ;SPF
-@					IN	TXT		"v=spf1 a mx include:_spf.google.com ~all"
+@					IN	TXT		"v=spf1 a mx ipv4=51.77.203.6 ~all"
 
 ;DKIM
-key._domainkey				IN	TXT	 	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDXxkYv6tUzkxnjtTWPpGZy3vN7Whyy+rqGrvm5t289C2csZUeyxmdUdTPZQu9iYk6xtcHDqOQM7k++2aKO3rHVbOTLTP8BJfiMPHD+4o2sInNZ/jGDNQn0PNhmb7pFjUX5pz+2xXKOyanyB3c/+EcTc2gCscHhPOkt3UGvl3suHQIDAQAB"
+dkim._domainkey				IN	TXT	 	"v=DKIM; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC0/cNq+6XooQh44e4CG4Y+zZKtsXRw/HD5+pygS/s5GB9v1czmMAtAOn8X92sCMqHWYeyzzaXG4VLUCfdxqhXTqWvtoLhiynTV/M4pAWPQtIwuyYtulOYP14Nnnhqq+STJu52sfiK4mL53NAiyu42meMMP0IJM65lkTuljTTl8QwIDAQAB"
 
 ;DMARC
-_dmarc					IN	TXT		"v=DMARC1;p=none;sp=reject;pct=100;aspf=r;fo=0;ri=86400;rua=mailto:dmarc@wt11.ephec-ti.be;"
+_dmarc					IN	TXT		"v=DMARC1;p=none;rua=mailto:admin@wt11.ephec-ti.be;"
 
 ;sip
-_sip.udp				IN	SRV	0	0	6201 	mail
+sip					IN	A		51.77.203.6
 
+_sip._udp					SRV	0		0	5060	sip
+_sip._tcp					SRV 	0		0	5060	sip
 

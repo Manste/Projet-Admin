@@ -4,7 +4,7 @@ FROM ubuntu:16.04
 
 # Maintainer
 
-MAINTAINER "d.bilongo@students.ephec.be"
+MAINTAINER "m.ndamtang@students.ephec.be"
 
 # Password definition
 
@@ -21,6 +21,7 @@ RUN apt-get update -y \
 # Copie des fichiers bash && config & Copy of the schema of the database
 
 COPY initDb.sh db_schema.sql entrypoint.sh /tmp/
+COPY mysqld.cnf /etc/mysql/mysql.conf.d/
 
 COPY mysqld.cnf /etc/mysql/mysql.conf.d/
 

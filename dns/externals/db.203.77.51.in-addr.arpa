@@ -1,7 +1,7 @@
 
 $TTL 604800
 $ORIGIN 203.77.51.in-addr.arpa.
-@       	IN 	SOA  	ns.wt11.ephec-ti.be. admin@wt11.ephec-ti.be. (
+@       	IN 	SOA  	ns.wt11.ephec-ti.be. admin.wt11.ephec-ti.be. (
                                 	1	   ;serial
                                 	3600       ; refresh 
                                 	600        ; retry 
@@ -17,3 +17,4 @@ $ORIGIN 203.77.51.in-addr.arpa.
 19		IN	PTR		www.wt11.ephec-ti.be.
 19		IN	PTR		b2b.wt11.ephec-ti.be.
 19		IN	PTR		intranet.wt11.ephec-ti.be.
+6		IN	PTR		sip
