@@ -6,12 +6,9 @@ MAINTAINER Manuelle Ndamtang <m.ndamtang@students.ephec.be>
 #	DEBIAN_FRONTEND=noninteractive apt-get -y -q install postfix postfix-mysql dovecot-mysql sasl2-bin mailutils mail-stack-delivery dovecot-core binutils opendkim clamav opendkim-tools opendmarc spamassassin spamc --no-install-recommends 
 
 RUN apt-get update &&\
-	DEBIAN_FRONTEND=noninteractive apt-get -y -q install postfix postfix-mysql dovecot-core dovecot-pop3d dovecot-imapd 
-	dovecot-lmtpd dovecot-mysql mailutils mysql-server binutils net-tools telnet spamassassin spamc opendkim
-	opendkim-tools --no-install-recommends
+	DEBIAN_FRONTEND=noninteractive apt-get -y -q install postfix postfix-mysql dovecot-core dovecot-pop3d dovecot-imapd dovecot-lmtpd dovecot-mysql mailutils mysql-server binutils net-tools telnet spamassassin spamc opendkim opendkim-tools --no-install-recommends
 
-ADD config.sh ./postfix/mysql-virtual-mailbox-maps.cf ./postfix/mysql-virtual-mailbox-domains.cf 
-./postfix/mysql-virtual-alias-maps.cf /tmp/
+ADD config.sh ./postfix/mysql-virtual-mailbox-maps.cf ./postfix/mysql-virtual-mailbox-domains.cf ./postfix/mysql-virtual-alias-maps.cf /tmp/
 RUN chmod +x /tmp/config.sh 
 
 WORKDIR /etc/postfix
@@ -58,7 +55,7 @@ RUN mkdir -p /etc/opendkim/ &&\
                                                                
 RUN /tmp/config.sh
 
-EXPOSE 25 143 465 993 110 995 783 23 3306
+EXPOSE 25 143 465 993 110 995 3306
 
 RUN adduser spamd --disabled-login
 COPY ./spamassassin/local.cf /etc/spamassassin/
