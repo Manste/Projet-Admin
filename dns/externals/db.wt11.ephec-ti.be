@@ -1,7 +1,7 @@
 
 $TTL 604800 
 $ORIGIN wt11.ephec-ti.be.
-@		IN 	SOA 	ns.wt11.ephec-ti.be. admin@wt11.ephec-ti.be. (
+@		IN 	SOA 	ns.wt11.ephec-ti.be. admin.wt11.ephec-ti.be. (
 					1	   ;serial
 					3600       ; refresh
 		                             6     ; retry 
